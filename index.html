@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบประเมินความพึงพอใจ | Product Satisfaction Survey</title>
+    <meta name="description" content="แบบประเมินความพึงพอใจผลิตภัณฑ์สุรากลั่นและน้ำส้มสายชูหมักจากสับปะรด GI จังหวัดเชียงราย">
+    <meta property="og:title" content="แบบประเมินความพึงพอใจผลิตภัณฑ์สับปะรด GI เชียงราย">
+    <meta property="og:description" content="กรุณาตอบแบบสอบถามเพื่อพัฒนาผลิตภัณฑ์ชุมชน">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍍</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Sarabun', 'Inter', sans-serif;
+            background: linear-gradient(135deg, #e8f5e9 0%, #fff8e1 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        body.lang-en { font-family: 'Inter', 'Sarabun', sans-serif; }
+        
+        .form-container { max-width: 700px; margin: 0 auto; }
+        
+        .lang-switcher { display: flex; justify-content: flex-end; margin-bottom: 12px; gap: 8px; }
+        
+        .lang-btn {
+            padding: 10px 20px;
+            border: 2px solid #f9a825;
+            background: white;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .lang-btn:hover { background: #fff8e1; }
+        
+        .lang-btn.active {
+            background: linear-gradient(135deg, #f9a825 0%, #ff8f00 100%);
+            color: white;
+            border-color: #f9a825;
+        }
+        
+        .th { display: inline; }
+        .en { display: none; }
+        body.lang-en .th { display: none; }
+        body.lang-en .en { display: inline; }
+        .th-block { display: block; }
+        .en-block { display: none; }
+        body.lang-en .th-block { display: none; }
+        body.lang-en .en-block { display: block; }
+        
+        .form-header {
+            background: linear-gradient(135deg, #f9a825 0%, #ff8f00 100%);
+            border-radius: 12px 12px 0 0;
+            padding: 30px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .form-header::before {
+            content: '🍍';
+            position: absolute;
+            font-size: 100px;
+            opacity: 0.15;
+            right: -20px;
+            top: -20px;
+        }
+        
+        .form-header h1 { font-size: 22px; font-weight: 700; margin-bottom: 10px; position: relative; z-index: 1; }
+        .form-header p { font-size: 14px; opacity: 0.95; position: relative; z-index: 1; }
+        
+        .org-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin-top: 15px;
+            font-size: 13px;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 12px;
+            margin-top: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        .section-header {
+            background: #fff3e0;
+            padding: 16px 24px;
+            border-bottom: 3px solid #f9a825;
+        }
+        
+        .section-header h2 { font-size: 18px; color: #e65100; display: flex; align-items: center; gap: 10px; }
+        
+        .section-content { padding: 24px; }
+        
+        .question { margin-bottom: 28px; }
+        .question:last-child { margin-bottom: 0; }
+        
+        .question-label { font-size: 15px; font-weight: 500; color: #333; margin-bottom: 12px; display: block; }
+        
+        .required { color: #d32f2f; margin-left: 4px; }
+        
+        .hint { font-size: 13px; color: #666; margin-top: 4px; margin-bottom: 10px; }
+        
+        .option-group { display: flex; flex-direction: column; gap: 10px; }
+        
+        .option-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .option-item:hover { border-color: #f9a825; background: #fffde7; }
+        
+        .option-item input { width: 18px; height: 18px; margin-right: 12px; accent-color: #f9a825; }
+        .option-item label { cursor: pointer; flex: 1; }
+        
+        .currency-selector {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding: 12px 16px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 10px;
+            border: 2px solid #2196f3;
+        }
+        
+        .currency-selector label { font-weight: 600; color: #1565c0; white-space: nowrap; }
+        
+        .currency-selector select {
+            flex: 1;
+            padding: 10px 14px;
+            border: 2px solid #2196f3;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+            background: white;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .exchange-rate-info {
+            font-size: 12px;
+            color: #1565c0;
+            margin-top: 8px;
+            padding: 8px 12px;
+            background: rgba(33, 150, 243, 0.1);
+            border-radius: 6px;
+        }
+        
+        .country-select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+            background: white;
+            cursor: pointer;
+        }
+        
+        .country-select:focus { outline: none; border-color: #f9a825; }
+        
+        .product-section {
+            border-left: 4px solid;
+            margin-left: -24px;
+            margin-right: -24px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+        }
+        
+        .product-section.liquor { border-color: #8d6e63; background: linear-gradient(90deg, #efebe9 0%, transparent 100%); }
+        .product-section.vinegar { border-color: #66bb6a; background: linear-gradient(90deg, #e8f5e9 0%, transparent 100%); }
+        
+        .product-title { font-size: 16px; font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .product-title.liquor { color: #5d4037; }
+        .product-title.vinegar { color: #2e7d32; }
+        
+        .eval-table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+        .eval-table th, .eval-table td { padding: 12px 8px; text-align: center; border-bottom: 1px solid #e0e0e0; }
+        .eval-table th { background: #fff3e0; font-weight: 600; font-size: 12px; }
+        .eval-table td:first-child { text-align: left; font-weight: 500; font-size: 14px; }
+        .eval-table input[type="radio"] { width: 20px; height: 20px; accent-color: #f9a825; }
+        
+        input[type="text"], input[type="number"], input[type="email"], textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        
+        input[type="text"]:focus, textarea:focus { outline: none; border-color: #f9a825; }
+        textarea { min-height: 100px; resize: vertical; }
+        
+        .submit-section { padding: 24px; text-align: center; }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #f9a825 0%, #ff8f00 100%);
+            color: white;
+            border: none;
+            padding: 16px 48px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-family: inherit;
+        }
+        
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(249, 168, 37, 0.4); }
+        .submit-btn:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
+        
+        .privacy-note { font-size: 12px; color: #666; margin-top: 16px; }
+        
+        .message { padding: 16px 24px; border-radius: 10px; margin-bottom: 20px; display: none; }
+        .message.success { background: #e8f5e9; border: 2px solid #4caf50; color: #2e7d32; }
+        .message.error { background: #ffebee; border: 2px solid #f44336; color: #c62828; }
+        .message.show { display: block; }
+        
+        .loading { display: none; text-align: center; padding: 20px; }
+        .loading.show { display: block; }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #f9a825;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .thank-you {
+            display: none;
+            text-align: center;
+            padding: 60px 40px;
+        }
+        
+        .thank-you.show { display: block; }
+        
+        .thank-you h2 { color: #2e7d32; font-size: 28px; margin-bottom: 20px; }
+        .thank-you p { color: #555; font-size: 16px; line-height: 1.8; }
+        .thank-you .icon { font-size: 80px; margin-bottom: 20px; }
+        
+        @media (max-width: 600px) {
+            .eval-table { font-size: 12px; }
+            .eval-table th, .eval-table td { padding: 8px 4px; }
+            .eval-table td:first-child { font-size: 12px; }
+            .form-header h1 { font-size: 18px; }
+            .currency-selector { flex-direction: column; align-items: stretch; }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <!-- Language Switcher -->
+        <div class="lang-switcher">
+            <button class="lang-btn active" id="btn-th" onclick="setLanguage('th')">🇹🇭 ไทย</button>
+            <button class="lang-btn" id="btn-en" onclick="setLanguage('en')">🇬🇧 English</button>
+        </div>
+        
+        <!-- Messages -->
+        <div class="message success" id="successMessage">
+            <span class="th">✅ ส่งแบบสอบถามเรียบร้อยแล้ว ขอบคุณที่สละเวลาตอบแบบสอบถาม!</span>
+            <span class="en">✅ Survey submitted successfully. Thank you for your time!</span>
+        </div>
+        
+        <div class="message error" id="errorMessage">
+            <span class="th">❌ เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง</span>
+            <span class="en">❌ An error occurred. Please try again.</span>
+        </div>
+        
+        <!-- Thank You Screen -->
+        <div class="section thank-you" id="thankYouScreen">
+            <div class="icon">🎉</div>
+            <h2>
+                <span class="th">ขอบคุณครับ/ค่ะ!</span>
+                <span class="en">Thank You!</span>
+            </h2>
+            <p>
+                <span class="th">
+                    ขอบคุณที่สละเวลาตอบแบบสอบถาม<br>
+                    ความคิดเห็นของท่านมีค่าอย่างยิ่งในการพัฒนาผลิตภัณฑ์<br><br>
+                    🍍 วิสาหกิจชุมชน ฮัก ณ เชียงราย
+                </span>
+                <span class="en">
+                    Thank you for taking the time to complete our survey.<br>
+                    Your feedback is invaluable for product development.<br><br>
+                    🍍 Huk Na Chiang Rai Community Enterprise
+                </span>
+            </p>
+        </div>
+        
+        <!-- Form -->
+        <form id="surveyForm">
+            <!-- Header -->
+            <div class="form-header">
+                <h1>
+                    <span class="th">🍍 แบบประเมินความพึงพอใจต่อผลิตภัณฑ์</span>
+                    <span class="en">🍍 Product Satisfaction Survey</span>
+                </h1>
+                <p>
+                    <span class="th">ผลิตภัณฑ์สุรากลั่นและน้ำส้มสายชูหมักจากสับปะรด GI จังหวัดเชียงราย</span>
+                    <span class="en">Distilled Liquor and Fermented Vinegar from Chiang Rai GI Pineapple</span>
+                </p>
+                <div class="org-badge">
+                    <span class="th">วิสาหกิจชุมชน ฮัก ณ เชียงราย | มหาวิทยาลัยราชภัฏเชียงราย</span>
+                    <span class="en">Huk Na Chiang Rai Community Enterprise | Chiang Rai Rajabhat University</span>
+                </div>
+            </div>
+            
+            <!-- Instructions -->
+            <div class="section">
+                <div class="section-content">
+                    <p class="th-block" style="line-height: 1.8; color: #555;">
+                        <strong>คำชี้แจง:</strong> แบบสอบถามนี้จัดทำขึ้นเพื่อประเมินความพึงพอใจของผู้บริโภคต่อผลิตภัณฑ์นวัตกรรมจากสับปะรด GI จังหวัดเชียงราย 
+                        ข้อมูลที่ได้จะนำไปใช้ในการปรับปรุงและพัฒนาผลิตภัณฑ์ให้ดียิ่งขึ้น ขอขอบคุณที่สละเวลาตอบแบบสอบถาม
+                    </p>
+                    <p class="en-block" style="line-height: 1.8; color: #555;">
+                        <strong>Instructions:</strong> This questionnaire is designed to evaluate consumer satisfaction with innovative products made from Chiang Rai GI Pineapple. 
+                        Your feedback will be used to improve and develop better products. Thank you for your time.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Part 1: General Information -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>
+                        <span class="th">📋 ส่วนที่ 1: ข้อมูลทั่วไปของผู้ตอบแบบสอบถาม</span>
+                        <span class="en">📋 Part 1: General Information</span>
+                    </h2>
+                </div>
+                <div class="section-content">
+                    <!-- Gender -->
+                    <div class="question">
+                        <span class="question-label">
+                            <span class="th">1.1 เพศ</span>
+                            <span class="en">1.1 Gender</span>
+                            <span class="required">*</span>
+                        </span>
+                        <div class="option-group">
+                            <div class="option-item">
+                                <input type="radio" name="gender" id="male" value="Male" required>
+                                <label for="male"><span class="th">ชาย</span><span class="en">Male</span></label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="gender" id="female" value="Female">
+                                <label for="female"><span class="th">หญิง</span><span class="en">Female</span></label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="gender" id="other_gender" value="Other">
+                                <label for="other_gender"><span class="th">ไม่ระบุ</span><span class="en">Prefer not to say</span></label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Age -->
+                    <div class="question">
+                        <span class="question-label">
+                            <span class="th">1.2 อายุ</span>
+                            <span class="en">1.2 Age</span>
+                            <span class="required">*</span>
+                        </span>
+                        <div class="option-group">
+                            <div class="option-item">
+                                <input type="radio" name="age" id="age1" value="20-30" required>
+                                <label for="age1"><span class="th">20-30 ปี</span><span class="en">20-30 years</span></label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="age" id="age2" value="31-40">
+                                <label for="age2"><span class="th">31-40 ปี</span><span class="en">31-40 years</span></label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="age" id="age3" value="41-50">
+                                <label for="age3"><span class="th">41-50 ปี</span><span class="en">41-50 years</span></label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="age" id="age4" value="51-60">
+                                <label for="age4"><span class="th">51-60 ปี</span><span class="en">51-60 years</span></label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="age" id="age5" value="60+">
+                                <label for="age5"><span class="th">60 ปีขึ้นไป</span><span class="en">60+ years</span></label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Country -->
+                    <div class="question">
+                        <span class="question-label">
+                            <span class="th">1.3 ประเทศ</span>
+                            <span class="en">1.3 Country</span>
+                            <span class="required">*</span>
+                        </span>
+                        <select class="country-select" name="country" id="countrySelect" onchange="onCountryChange()" required>
+                            <option value="">-- กรุณาเลือกประเทศ / Select Country --</option>
+                            <optgroup label="🌏 Asia / เอเชีย">
+                                <option value="Thailand" data-currency="THB">🇹🇭 Thailand / ไทย</option>
+                                <option value="Japan" data-currency="JPY">🇯🇵 Japan / ญี่ปุ่น</option>
+                                <option value="China" data-currency="CNY">🇨🇳 China / จีน</option>
+                                <option value="South Korea" data-currency="KRW">🇰🇷 South Korea / เกาหลีใต้</option>
+                                <option value="Singapore" data-currency="SGD">🇸🇬 Singapore / สิงคโปร์</option>
+                                <option value="Malaysia" data-currency="MYR">🇲🇾 Malaysia / มาเลเซีย</option>
+                                <option value="Vietnam" data-currency="VND">🇻🇳 Vietnam / เวียดนาม</option>
+                                <option value="Indonesia" data-currency="IDR">🇮🇩 Indonesia / อินโดนีเซีย</option>
+                                <option value="Philippines" data-currency="PHP">🇵🇭 Philippines / ฟิลิปปินส์</option>
+                                <option value="Myanmar" data-currency="MMK">🇲🇲 Myanmar / เมียนมา</option>
+                                <option value="Laos" data-currency="LAK">🇱🇦 Laos / ลาว</option>
+                                <option value="Cambodia" data-currency="KHR">🇰🇭 Cambodia / กัมพูชา</option>
+                                <option value="India" data-currency="INR">🇮🇳 India / อินเดีย</option>
+                                <option value="Taiwan" data-currency="TWD">🇹🇼 Taiwan / ไต้หวัน</option>
+                                <option value="Hong Kong" data-currency="HKD">🇭🇰 Hong Kong / ฮ่องกง</option>
+                            </optgroup>
+                            <optgroup label="🌍 Europe / ยุโรป">
+                                <option value="United Kingdom" data-currency="GBP">🇬🇧 United Kingdom</option>
+                                <option value="Germany" data-currency="EUR">🇩🇪 Germany</option>
+                                <option value="France" data-currency="EUR">🇫🇷 France</option>
+                                <option value="Italy" data-currency="EUR">🇮🇹 Italy</option>
+                                <option value="Spain" data-currency="EUR">🇪🇸 Spain</option>
+                                <option value="Netherlands" data-currency="EUR">🇳🇱 Netherlands</option>
+                                <option value="Switzerland" data-currency="CHF">🇨🇭 Switzerland</option>
+                            </optgroup>
+                            <optgroup label="🌎 Americas / อเมริกา">
+                                <option value="United States" data-currency="USD">🇺🇸 United States</option>
+                                <option value="Canada" data-currency="CAD">🇨🇦 Canada</option>
+                                <option value="Mexico" data-currency="MXN">🇲🇽 Mexico</option>
+                                <option value="Brazil" data-currency="BRL">🇧🇷 Brazil</option>
+                            </optgroup>
+                            <optgroup label="🌏 Oceania / โอเชียเนีย">
+                                <option value="Australia" data-currency="AUD">🇦🇺 Australia</option>
+                                <option value="New Zealand" data-currency="NZD">🇳🇿 New Zealand</option>
+                            </optgroup>
+                            <option value="Other" data-currency="USD">🌐 Other / อื่นๆ</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Occupation -->
+                    <div class="question">
+                        <span class="question-label">
+                            <span class="th">1.4 อาชีพ</span>
+                            <span class="en">1.4 Occupation</span>
+                            <span class="required">*</span>
+                        </span>
+                        <div class="option-group">
+                            <div class="option-item">
+                                <input type="radio" name="occupation" id="occ1" value="Student" required>
+                                <label for="occ1"><span class="th">นักเรียน/นักศึกษา</span><span class="en">Student</span></label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="occupation" id="occ2" value="Government Officer">
+                                <label for="occ2"><span class="th">ข้าราชการ/พนักงานรัฐวิสาหกิจ</span><span class="en">Government Officer</span></label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="occupation" id="occ3" value="Private Employee">
+                                <label for="occ3"><span class="th">พนักงานบริษัทเอกชน</span><span class="en">Private Company Employee</span></label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="occupation" id="occ4" value="Business Owner">
+                                <label for="occ4"><span class="th">ธุรกิจส่วนตัว/ค้าขาย</span><span class="en">Business Owner</span></label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="occupation" id="occ5" value="Farmer">
+                                <label for="occ5"><span class="th">เกษตรกร</span><span class="en">Farmer</span></label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="occupation" id="occ6" value="Other">
+                                <label for="occ6"><span class="th">อื่นๆ</span><span class="en">Other</span></label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Income -->
+                    <div class="question">
+                        <span class="question-label">
+                            <span class="th">1.5 รายได้เฉลี่ยต่อเดือน</span>
+                            <span class="en">1.5 Monthly Income</span>
+                        </span>
+                        
+                        <div class="currency-selector">
+                            <label>
+                                <span class="th">💱 สกุลเงิน:</span>
+                                <span class="en">💱 Currency:</span>
+                            </label>
+                            <select id="currencySelect" onchange="updateIncomeOptions()">
+                                <option value="THB" data-symbol="฿" data-rate="1">🇹🇭 THB (฿)</option>
+                                <option value="USD" data-symbol="$" data-rate="0.029">🇺🇸 USD ($)</option>
+                                <option value="EUR" data-symbol="€" data-rate="0.026">🇪🇺 EUR (€)</option>
+                                <option value="GBP" data-symbol="£" data-rate="0.023">🇬🇧 GBP (£)</option>
+                                <option value="JPY" data-symbol="¥" data-rate="4.35">🇯🇵 JPY (¥)</option>
+                                <option value="CNY" data-symbol="¥" data-rate="0.21">🇨🇳 CNY (¥)</option>
+                                <option value="KRW" data-symbol="₩" data-rate="39.5">🇰🇷 KRW (₩)</option>
+                                <option value="SGD" data-symbol="S$" data-rate="0.038">🇸🇬 SGD (S$)</option>
+                                <option value="MYR" data-symbol="RM" data-rate="0.127">🇲🇾 MYR (RM)</option>
+                                <option value="AUD" data-symbol="A$" data-rate="0.044">🇦🇺 AUD (A$)</option>
+                            </select>
+                        </div>
+                        <div class="exchange-rate-info" id="exchangeRateInfo">
+                            <span class="th">💡 อัตราแลกเปลี่ยนโดยประมาณ: 1 THB = 1.00 THB</span>
+                            <span class="en">💡 Approximate exchange rate: 1 THB = 1.00 THB</span>
+                        </div>
+                        
+                        <div class="option-group" id="incomeOptions">
+                            <div class="option-item">
+                                <input type="radio" name="income" id="inc1" value="<15000 THB">
+                                <label for="inc1">
+                                    <span class="th">ต่ำกว่า <span class="income-value" id="inc1_val">15,000 ฿</span></span>
+                                    <span class="en">Less than <span class="income-value" id="inc1_val_en">15,000 ฿</span></span>
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="income" id="inc2" value="15000-25000 THB">
+                                <label for="inc2">
+                                    <span class="th"><span class="income-value" id="inc2_val">15,000 - 25,000 ฿</span></span>
+                                    <span class="en"><span class="income-value" id="inc2_val_en">15,000 - 25,000 ฿</span></span>
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="income" id="inc3" value="25001-35000 THB">
+                                <label for="inc3">
+                                    <span class="th"><span class="income-value" id="inc3_val">25,001 - 35,000 ฿</span></span>
+                                    <span class="en"><span class="income-value" id="inc3_val_en">25,001 - 35,000 ฿</span></span>
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="income" id="inc4" value="35001-50000 THB">
+                                <label for="inc4">
+                                    <span class="th"><span class="income-value" id="inc4_val">35,001 - 50,000 ฿</span></span>
+                                    <span class="en"><span class="income-value" id="inc4_val_en">35,001 - 50,000 ฿</span></span>
+                                </label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="income" id="inc5" value=">50000 THB">
+                                <label for="inc5">
+                                    <span class="th">มากกว่า <span class="income-value" id="inc5_val">50,000 ฿</span></span>
+                                    <span class="en">More than <span class="income-value" id="inc5_val_en">50,000 ฿</span></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Part 2: Liquor Satisfaction -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>
+                        <span class="th">🥃 ส่วนที่ 2: ความพึงพอใจต่อสุรากลั่นจากสับปะรด GI</span>
+                        <span class="en">🥃 Part 2: Distilled Pineapple Liquor Satisfaction</span>
+                    </h2>
+                </div>
+                <div class="section-content">
+                    <p class="hint" style="margin-bottom: 20px;">
+                        <span class="th">กรุณาประเมินความพึงพอใจในแต่ละด้าน (5 = มากที่สุด, 1 = น้อยที่สุด)</span>
+                        <span class="en">Please rate your satisfaction (5 = Highest, 1 = Lowest)</span>
+                    </p>
+                    
+                    <!-- Liquor Taste -->
+                    <div class="product-section liquor">
+                        <div class="product-title liquor">
+                            <span class="th">🍶 ด้านรสชาติ</span>
+                            <span class="en">🍶 Taste</span>
+                        </div>
+                        <table class="eval-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 40%;"><span class="th">ประเด็นประเมิน</span><span class="en">Criteria</span></th>
+                                    <th>5</th><th>4</th><th>3</th><th>2</th><th>1</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="th">ความนุ่มนวล</span><span class="en">Smoothness</span></td>
+                                    <td><input type="radio" name="liquor_taste_smoothness" value="5"></td>
+                                    <td><input type="radio" name="liquor_taste_smoothness" value="4"></td>
+                                    <td><input type="radio" name="liquor_taste_smoothness" value="3"></td>
+                                    <td><input type="radio" name="liquor_taste_smoothness" value="2"></td>
+                                    <td><input type="radio" name="liquor_taste_smoothness" value="1"></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="th">ความกลมกล่อม</span><span class="en">Balance</span></td>
+                                    <td><input type="radio" name="liquor_taste_balance" value="5"></td>
+                                    <td><input type="radio" name="liquor_taste_balance" value="4"></td>
+                                    <td><input type="radio" name="liquor_taste_balance" value="3"></td>
+                                    <td><input type="radio" name="liquor_taste_balance" value="2"></td>
+                                    <td><input type="radio" name="liquor_taste_balance" value="1"></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="th">รสสับปะรดโดดเด่น</span><span class="en">Pineapple flavor</span></td>
+                                    <td><input type="radio" name="liquor_taste_pineapple" value="5"></td>
+                                    <td><input type="radio" name="liquor_taste_pineapple" value="4"></td>
+                                    <td><input type="radio" name="liquor_taste_pineapple" value="3"></td>
+                                    <td><input type="radio" name="liquor_taste_pineapple" value="2"></td>
+                                    <td><input type="radio" name="liquor_taste_pineapple" value="1"></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="th">ระดับแอลกอฮอล์</span><span class="en">Alcohol level</span></td>
+                                    <td><input type="radio" name="liquor_taste_alcohol" value="5"></td>
+                                    <td><input type="radio" name="liquor_taste_alcohol" value="4"></td>
+                                    <td><input type="radio" name="liquor_taste_alcohol" value="3"></td>
+                                    <td><input type="radio" name="liquor_taste_alcohol" value="2"></td>
+                                    <td><input type="radio" name="liquor_taste_alcohol" value="1"></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="th">ความพึงพอใจรวม</span><span class="en">Overall</span></td>
+                                    <td><input type="radio" name="liquor_taste_overall" value="5"></td>
+                                    <td><input type="radio" name="liquor_taste_overall" value="4"></td>
+                                    <td><input type="radio" name="liquor_taste_overall" value="3"></td>
+                                    <td><input type="radio" name="liquor_taste_overall" value="2"></td>
+                                    <td><input type="radio" name="liquor_taste_overall" value="1"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Liquor Aroma -->
+                    <div class="product-section liquor">
+                        <div class="product-title liquor">
+                            <span class="th">👃 ด้านกลิ่น</span>
+                            <span class="en">👃 Aroma</span>
+                        </div>
+                        <table class="eval-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 40%;"><span class="th">ประเด็นประเมิน</span><span class="en">Criteria</span></th>
+                                    <th>5</th><th>4</th><th>3</th><th>2</th><th>1</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="th">ความหอมสับปะรด</span><span class="en">Pineapple aroma</span></td>
+                                    <td><input type="radio" name="liquor_aroma_pineapple" value="5"></td>
+                                    <td><input type="radio" name="liquor_aroma_pineapple" value="4"></td>
+                                    <td><input type="radio" name="liquor_aroma_pineapple" value="3"></td>
+                                    <td><input type="radio" name="liquor_aroma_pineapple" value="2"></td>
+                                    <td><input type="radio" name="liquor_aroma_pineapple" value="1"></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="th">ความสดชื่น</span><span class="en">Freshness</span></td>
+                                    <td><input type="radio" name="liquor_aroma_fresh" value="5"></td>
+                                    <td><input type="radio" name="liquor_aroma_fresh" value="4"></td>
+                                    <td><input type="radio" name="liquor_aroma_fresh" value="3"></td>
+                                    <td><input type="radio" name="liquor_aroma_fresh" value="2"></td>
+                                    <td><input type="radio" name="liquor_aroma_fresh" value="1"></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="th">ไม่ฉุน/แสบจมูก</span><span class="en">No harsh smell</span></td>
+                                    <td><input type="radio" name="liquor_aroma_noharsh" value="5"></td>
+                                    <td><input type="radio" name="liquor_aroma_noharsh" value="4"></td>
+                                    <td><input type="radio" name="liquor_aroma_noharsh" value="3"></td>
+                                    <td><input type="radio" name="liquor_aroma_noharsh" value="2"></td>
+                                    <td><input type="radio" name="liquor_aroma_noharsh" value="1"></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="th">ความพึงพอใจรวม</span><span class="en">Overall</span></td>
+                                    <td><input type="radio" name="liquor_aroma_overall" value="5"></td>
+                                    <td><input type="radio" name="liquor_aroma_overall" value="4"></td>
+                                    <td><input type="radio" name="liquor_aroma_overall" value="3"></td>
+                                    <td><input type="radio" name="liquor_aroma_overall" value="2"></td>
+                                    <td><input type="radio" name="liquor_aroma_overall" value="1"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Liquor Packaging -->
+                    <div class="product-section liquor">
+                        <div class="product-title liquor">
+                            <span class="th">📦 ด้านบรรจุภัณฑ์</span>
+                            <span class="en">📦 Packaging</span>
+                        </div>
+                        <table class="eval-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 40%;"><span class="th">ประเด็นประเมิน</span><span class="en">Criteria</span></th>
+                                    <th>5</th><th>4</th><th>3</th><th>2</th><th>1</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="th">ความสวยงาม</span><span class="en">Aesthetics</span></td>
+                                    <td><input type="radio" name="liquor_pack_aesthetics" value="5"></td>
+                                    <td><input type="radio" name="liquor_pack_aesthetics" value="4"></td>
+                                    <td><input type="radio" name="liquor_pack_aesthetics" value="3"></td>
+                                    <td><input type="radio" name="liquor_pack_aesthetics" value="2"></td>
+                                    <td><input type="radio" name="liquor_pack_aesthetics" value="1"></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="th">ข้อมูลครบถ้วน</span><span class="en">Information clarity</span></td>
+                                    <td><input type="radio" name="liquor_pack_info" value="5"></td>
+                                    <td><input type="radio" name="liquor_pack_info" value="4"></td>
+                                    <td><input type="radio" name="liquor_pack_info" value="3"></td>
+                                    <td><input type="radio" name="liquor_pack_info" value="2"></td>
+                                    <td><input type="radio" name="liquor_pack_info" value="1"></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="th">สื่ออัตลักษณ์ GI</span><span class="en">GI identity</span></td>
+                                    <td><input type="radio" name="liquor_pack_gi" value="5"></td>
+                                    <td><input type="radio" name="liquor_pack_gi" value="4"></td>
+                                    <td><input type="radio" name="liquor_pack_gi" value="3"></td>
+                                    <td><input type="radio" name="liquor_pack_gi" value="2"></td>
+                                    <td><input type="radio" name="liquor_pack_gi" value="1"></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="th">เหมาะเป็นของฝาก</span><span class="en">Gift suitability</span></td>
+                                    <td><input type="radio" name="liquor_pack_gift" value="5"></td>
+                                    <td><input type="radio" name="liquor_pack_gift" value="4"></td>
+                                    <td><input type="radio" name="liquor_pack_gift" value="3"></td>
+                                    <td><input type="radio" name="liquor_pack_gift" value="2"></td>
+                                    <td><input type="radio" name="liquor_pack_gift" value="1"></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="th">ความคุ้มค่า</span><span class="en">Value for money</span></td>
+                                    <td><input type="radio" name="liquor_pack_value" value="5"></td>
+                                    <td><input type="radio" name="liquor_pack_value" value="4"></td>
+                                    <td><input type="radio" name="liquor_pack_value" value="3"></td>
+                                    <td><input type="radio" name="liquor_pack_value" value="2"></td>
+                                    <td><input type="radio" name="liquor_pack_value" value="1"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Part 3: Vinegar Satisfaction -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>
+                        <span class="th">🍋 ส่วนที่ 3: ความพึงพอใจต่อน้ำส้มสายชูหมัก</span>
+                        <span class="en">🍋 Part 3: Fermented Vinegar Satisfaction</span>
+                    </h2>
+                </div>
+                <div class="section-content">
+                    <!-- Vinegar Taste -->
+                    <div class="product-section vinegar">
+                        <div class="product-title vinegar">
+                            <span class="th">🍶 ด้านรสชาติ</span>
+                            <span class="en">🍶 Taste</span>
+                        </div>
+                        <table class="eval-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 40%;"><span class="th">ประเด็นประเมิน</span><span class="en">Criteria</span></th>
+                                    <th>5</th><th>4</th><th>3</th><th>2</th><th>1</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="th">ความเปรี้ยวเหมาะสม</span><span class="en">Acidity level</span></td>
+                                    <td><input type="radio" name="vinegar_taste_acidity" value="5"></td>
+                                    <td><input type="radio" name="vinegar_taste_acidity" value="4"></td>
+                                    <td><input type="radio" name="vinegar_taste_acidity" value="3"></td>
+                                    <td><input type="radio" name="vinegar_taste_acidity" value="2"></td>
+                                    <td><input type="radio" name="vinegar_taste_acidity" value="1"></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="th">รสสับปะรดโดดเด่น</span><span class="en">Pineapple flavor</span></td>
+                                    <td><input type="radio" name="vinegar_taste_pineapple" value="5"></td>
+                                    <td><input type="radio" name="vinegar_taste_pineapple" value="4"></td>
+                                    <td><input type="radio" name="vinegar_taste_pineapple" value="3"></td>
+                                    <td><input type="radio" name="vinegar_taste_pineapple" value="2"></td>
+                                    <td><input type="radio" name="vinegar_taste_pineapple" value="1"></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="th">ความกลมกล่อม</span><span class="en">Balance</span></td>
+                                    <td><input type="radio" name="vinegar_taste_balance" value="5"></td>
+                                    <td><input type="radio" name="vinegar_taste_balance" value="4"></td>
+                                    <td><input type="radio" name="vinegar_taste_balance" value="3"></td>
+                                    <td><input type="radio" name="vinegar_taste_balance" value="2"></td>
+                                    <td><input type="radio" name="vinegar_taste_balance" value="1"></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="th">เหมาะกับการทำอาหาร</span><span class="en">Cooking suitability</span></td>
+                                    <td><input type="radio" name="vinegar_taste_cooking" value="5"></td>
+                                    <td><input type="radio" name="vinegar_taste_cooking" value="4"></td>
+                                    <td><input type="radio" name="vinegar_taste_cooking" value="3"></td>
+                                    <td><input type="radio" name="vinegar_taste_cooking" value="2"></td>
+                                    <td><input type="radio" name="vinegar_taste_cooking" value="1"></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="th">ความพึงพอใจรวม</span><span class="en">Overall</span></td>
+                                    <td><input type="radio" name="vinegar_taste_overall" value="5"></td>
+                                    <td><input type="radio" name="vinegar_taste_overall" value="4"></td>
+                                    <td><input type="radio" name="vinegar_taste_overall" value="3"></td>
+                                    <td><input type="radio" name="vinegar_taste_overall" value="2"></td>
+                                    <td><input type="radio" name="vinegar_taste_overall" value="1"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Vinegar Packaging -->
+                    <div class="product-section vinegar">
+                        <div class="product-title vinegar">
+                            <span class="th">📦 ด้านบรรจุภัณฑ์</span>
+                            <span class="en">📦 Packaging</span>
+                        </div>
+                        <table class="eval-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 40%;"><span class="th">ประเด็นประเมิน</span><span class="en">Criteria</span></th>
+                                    <th>5</th><th>4</th><th>3</th><th>2</th><th>1</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="th">ความสวยงาม</span><span class="en">Aesthetics</span></td>
+                                    <td><input type="radio" name="vinegar_pack_aesthetics" value="5"></td>
+                                    <td><input type="radio" name="vinegar_pack_aesthetics" value="4"></td>
+                                    <td><input type="radio" name="vinegar_pack_aesthetics" value="3"></td>
+                                    <td><input type="radio" name="vinegar_pack_aesthetics" value="2"></td>
+                                    <td><input type="radio" name="vinegar_pack_aesthetics" value="1"></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="th">สื่ออัตลักษณ์ GI</span><span class="en">GI identity</span></td>
+                                    <td><input type="radio" name="vinegar_pack_gi" value="5"></td>
+                                    <td><input type="radio" name="vinegar_pack_gi" value="4"></td>
+                                    <td><input type="radio" name="vinegar_pack_gi" value="3"></td>
+                                    <td><input type="radio" name="vinegar_pack_gi" value="2"></td>
+                                    <td><input type="radio" name="vinegar_pack_gi" value="1"></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="th">เหมาะเป็นของฝาก</span><span class="en">Gift suitability</span></td>
+                                    <td><input type="radio" name="vinegar_pack_gift" value="5"></td>
+                                    <td><input type="radio" name="vinegar_pack_gift" value="4"></td>
+                                    <td><input type="radio" name="vinegar_pack_gift" value="3"></td>
+                                    <td><input type="radio" name="vinegar_pack_gift" value="2"></td>
+                                    <td><input type="radio" name="vinegar_pack_gift" value="1"></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="th">ความคุ้มค่า</span><span class="en">Value for money</span></td>
+                                    <td><input type="radio" name="vinegar_pack_value" value="5"></td>
+                                    <td><input type="radio" name="vinegar_pack_value" value="4"></td>
+                                    <td><input type="radio" name="vinegar_pack_value" value="3"></td>
+                                    <td><input type="radio" name="vinegar_pack_value" value="2"></td>
+                                    <td><input type="radio" name="vinegar_pack_value" value="1"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Part 4: Comments -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>
+                        <span class="th">💬 ส่วนที่ 4: ความคิดเห็นเพิ่มเติม</span>
+                        <span class="en">💬 Part 4: Additional Comments</span>
+                    </h2>
+                </div>
+                <div class="section-content">
+                    <!-- Products tried -->
+                    <div class="question">
+                        <span class="question-label">
+                            <span class="th">4.1 ผลิตภัณฑ์ที่ทดลอง</span>
+                            <span class="en">4.1 Products tried</span>
+                            <span class="required">*</span>
+                        </span>
+                        <div class="option-group">
+                            <div class="option-item">
+                                <input type="checkbox" name="products_tried" id="tried_liquor" value="Liquor">
+                                <label for="tried_liquor"><span class="th">สุรากลั่น</span><span class="en">Distilled Liquor</span></label>
+                            </div>
+                            <div class="option-item">
+                                <input type="checkbox" name="products_tried" id="tried_vinegar" value="Vinegar">
+                                <label for="tried_vinegar"><span class="th">น้ำส้มสายชูหมัก</span><span class="en">Fermented Vinegar</span></label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recommendation -->
+                    <div class="question">
+                        <span class="question-label">
+                            <span class="th">4.2 จะแนะนำผู้อื่นหรือไม่</span>
+                            <span class="en">4.2 Would you recommend?</span>
+                            <span class="required">*</span>
+                        </span>
+                        <div class="option-group">
+                            <div class="option-item">
+                                <input type="radio" name="recommend" id="rec1" value="Definitely" required>
+                                <label for="rec1"><span class="th">แนะนำแน่นอน</span><span class="en">Definitely</span></label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="recommend" id="rec2" value="Probably">
+                                <label for="rec2"><span class="th">น่าจะแนะนำ</span><span class="en">Probably</span></label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="recommend" id="rec3" value="Maybe">
+                                <label for="rec3"><span class="th">อาจจะแนะนำ</span><span class="en">Maybe</span></label>
+                            </div>
+                            <div class="option-item">
+                                <input type="radio" name="recommend" id="rec4" value="Probably Not">
+                                <label for="rec4"><span class="th">คงไม่แนะนำ</span><span class="en">Probably Not</span></label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Likes -->
+                    <div class="question">
+                        <span class="question-label">
+                            <span class="th">4.3 สิ่งที่ชื่นชอบมากที่สุด</span>
+                            <span class="en">4.3 What do you like most?</span>
+                        </span>
+                        <textarea name="likes" placeholder=""></textarea>
+                    </div>
+                    
+                    <!-- Suggestions -->
+                    <div class="question">
+                        <span class="question-label">
+                            <span class="th">4.4 ข้อเสนอแนะในการปรับปรุง</span>
+                            <span class="en">4.4 Suggestions for improvement</span>
+                        </span>
+                        <textarea name="suggestions" placeholder=""></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Submit -->
+            <div class="section">
+                <div class="loading" id="loadingSpinner">
+                    <div class="spinner"></div>
+                    <p><span class="th">กำลังส่งข้อมูล...</span><span class="en">Submitting...</span></p>
+                </div>
+                
+                <div class="submit-section" id="submitSection">
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <span class="th">ส่งแบบสอบถาม</span>
+                        <span class="en">Submit Survey</span>
+                    </button>
+                    <p class="privacy-note">
+                        <span class="th">🔒 ข้อมูลของท่านจะถูกเก็บรักษาเป็นความลับ</span>
+                        <span class="en">🔒 Your information will be kept confidential</span>
+                    </p>
+                </div>
+            </div>
+        </form>
+        
+        <!-- Footer -->
+        <div style="text-align: center; margin-top: 20px; padding: 20px; color: #666; font-size: 13px;">
+            <p class="th-block">
+                โครงการพัฒนานวัตกรรมสุรากลั่นและน้ำส้มสายชูหมักจากสับปะรด GI จังหวัดเชียงราย<br>
+                วิสาหกิจชุมชน ฮัก ณ เชียงราย ร่วมกับ มหาวิทยาลัยราชภัฏเชียงราย<br>
+                สนับสนุนโดย กระทรวงการอุดมศึกษา วิทยาศาสตร์ วิจัยและนวัตกรรม (อว.)
+            </p>
+            <p class="en-block">
+                Development of Distilled Liquor and Fermented Vinegar from Chiang Rai GI Pineapple<br>
+                Huk Na Chiang Rai Community Enterprise | Chiang Rai Rajabhat University<br>
+                Supported by Ministry of Higher Education, Science, Research and Innovation
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        // ============================================
+        // 🔧 CONFIGURATION - ใส่ URL ของ Google Apps Script ที่นี่
+        // ============================================
+        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
+        // ============================================
+        
+        const currencies = {
+            THB: { symbol: '฿', rate: 1 },
+            USD: { symbol: '$', rate: 0.029 },
+            EUR: { symbol: '€', rate: 0.026 },
+            GBP: { symbol: '£', rate: 0.023 },
+            JPY: { symbol: '¥', rate: 4.35 },
+            CNY: { symbol: '¥', rate: 0.21 },
+            KRW: { symbol: '₩', rate: 39.5 },
+            SGD: { symbol: 'S$', rate: 0.038 },
+            MYR: { symbol: 'RM', rate: 0.127 },
+            AUD: { symbol: 'A$', rate: 0.044 }
+        };
+        
+        function formatNumber(num, currency) {
+            if (currency === 'JPY' || currency === 'KRW') return Math.round(num).toLocaleString();
+            return num.toLocaleString(undefined, { maximumFractionDigits: 0 });
+        }
+        
+        function updateIncomeOptions() {
+            const select = document.getElementById('currencySelect');
+            const selectedCurrency = select.value;
+            const currencyData = currencies[selectedCurrency];
+            const symbol = currencyData.symbol;
+            const rate = currencyData.rate;
+            
+            const rateInfo = document.getElementById('exchangeRateInfo');
+            const thbEquivalent = (1 / rate).toFixed(2);
+            rateInfo.innerHTML = `
+                <span class="th">💡 อัตราแลกเปลี่ยนโดยประมาณ: 1 ${selectedCurrency} = ${thbEquivalent} THB</span>
+                <span class="en">💡 Approximate exchange rate: 1 ${selectedCurrency} = ${thbEquivalent} THB</span>
+            `;
+            
+            const val1 = formatNumber(15000 * rate, selectedCurrency);
+            document.getElementById('inc1_val').textContent = `${val1} ${symbol}`;
+            document.getElementById('inc1_val_en').textContent = `${val1} ${symbol}`;
+            
+            const val2_min = formatNumber(15000 * rate, selectedCurrency);
+            const val2_max = formatNumber(25000 * rate, selectedCurrency);
+            document.getElementById('inc2_val').textContent = `${val2_min} - ${val2_max} ${symbol}`;
+            document.getElementById('inc2_val_en').textContent = `${val2_min} - ${val2_max} ${symbol}`;
+            
+            const val3_min = formatNumber(25001 * rate, selectedCurrency);
+            const val3_max = formatNumber(35000 * rate, selectedCurrency);
+            document.getElementById('inc3_val').textContent = `${val3_min} - ${val3_max} ${symbol}`;
+            document.getElementById('inc3_val_en').textContent = `${val3_min} - ${val3_max} ${symbol}`;
+            
+            const val4_min = formatNumber(35001 * rate, selectedCurrency);
+            const val4_max = formatNumber(50000 * rate, selectedCurrency);
+            document.getElementById('inc4_val').textContent = `${val4_min} - ${val4_max} ${symbol}`;
+            document.getElementById('inc4_val_en').textContent = `${val4_min} - ${val4_max} ${symbol}`;
+            
+            const val5 = formatNumber(50000 * rate, selectedCurrency);
+            document.getElementById('inc5_val').textContent = `${val5} ${symbol}`;
+            document.getElementById('inc5_val_en').textContent = `${val5} ${symbol}`;
+        }
+        
+        function onCountryChange() {
+            const countrySelect = document.getElementById('countrySelect');
+            const selectedOption = countrySelect.options[countrySelect.selectedIndex];
+            const countryCurrency = selectedOption.getAttribute('data-currency');
+            
+            if (countryCurrency && currencies[countryCurrency]) {
+                const currencySelect = document.getElementById('currencySelect');
+                for (let i = 0; i < currencySelect.options.length; i++) {
+                    if (currencySelect.options[i].value === countryCurrency) {
+                        currencySelect.selectedIndex = i;
+                        updateIncomeOptions();
+                        break;
+                    }
+                }
+            }
+        }
+        
+        function setLanguage(lang) {
+            const body = document.body;
+            const btnTh = document.getElementById('btn-th');
+            const btnEn = document.getElementById('btn-en');
+            
+            if (lang === 'en') {
+                body.classList.add('lang-en');
+                btnEn.classList.add('active');
+                btnTh.classList.remove('active');
+            } else {
+                body.classList.remove('lang-en');
+                btnTh.classList.add('active');
+                btnEn.classList.remove('active');
+            }
+            localStorage.setItem('surveyLang', lang);
+        }
+        
+        // Form submission
+        document.getElementById('surveyForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
+                alert('⚠️ กรุณาตั้งค่า Google Script URL ก่อน\n\nPlease configure Google Script URL first.');
+                return;
+            }
+            
+            const form = e.target;
+            const submitBtn = document.getElementById('submitBtn');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            const thankYouScreen = document.getElementById('thankYouScreen');
+            
+            successMessage.classList.remove('show');
+            errorMessage.classList.remove('show');
+            submitBtn.disabled = true;
+            loadingSpinner.classList.add('show');
+            
+            const formData = new FormData(form);
+            const data = {
+                timestamp: new Date().toISOString(),
+                language: document.body.classList.contains('lang-en') ? 'EN' : 'TH',
+                currency: document.getElementById('currencySelect').value
+            };
+            
+            formData.forEach((value, key) => {
+                if (data[key]) {
+                    if (Array.isArray(data[key])) {
+                        data[key].push(value);
+                    } else {
+                        data[key] = [data[key], value];
+                    }
+                } else {
+                    data[key] = value;
+                }
+            });
+            
+            Object.keys(data).forEach(key => {
+                if (Array.isArray(data[key])) data[key] = data[key].join(', ');
+            });
+            
+            try {
+                await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                form.style.display = 'none';
+                thankYouScreen.classList.add('show');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+            } catch (error) {
+                console.error('Error:', error);
+                errorMessage.classList.add('show');
+                submitBtn.disabled = false;
+            } finally {
+                loadingSpinner.classList.remove('show');
+            }
+        });
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('surveyLang');
+            if (savedLang) setLanguage(savedLang);
+            updateIncomeOptions();
+        });
+    </script>
+</body>
+</html>
